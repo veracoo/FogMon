@@ -99,14 +99,20 @@ public:
     virtual std::vector<Message::node> getMLRHardware(int num, int seconds) {return vector<Message::node>();}
 
     virtual void addMNode(Message::node ip) {}
-    virtual Report::report_result getReport(Message::node ip) {}
+
+    virtual Report::report_result getReport(Message::node ip, bool complete) {}
+    std::vector<Report::report_result> getReport(bool complete = false) {}
+
     virtual std::vector<Message::node> getAllNodes() {}
     virtual vector<Message::node> getMNodes() {}
     virtual vector<Report::report_result> getReport() {}
 
     virtual Report::hardware_result getHardware(Message::node ip) {}
-    virtual std::vector<Report::test_result> getLatency(Message::node ip) {}
-    virtual std::vector<Report::test_result> getBandwidth(Message::node ip) {}
+
+    virtual std::vector<Report::test_result> getLatency(Message::node ip, bool complete) {}
+
+    virtual std::vector<Report::test_result> getBandwidth(Message::node ip, bool complete) {}
+
     virtual std::string addNode(Message::node strIp, Report::hardware_result hardware, Message::node *monitored = NULL) {}
     virtual void addReport(Report::report_result result, Message::node *monitored = NULL) {}
     virtual void addReport(std::vector<Report::report_result> results, Message::node ip) {}
@@ -187,17 +193,17 @@ TEST(ConnectionsTest, RStartIperf) {
 
     Message mess;
     mess.setSender(nodeN);
-    mess.setType(Message::Type::REQUEST);
-    mess.setCommand(Message::Command::START);
-    mess.setArgument(Message::Argument::IPERF);
+    mess.setType(Message::Type::typeREQUEST);
+    mess.setCommand(Message::Command::commSTART);
+    mess.setArgument(Message::Argument::argIPERF);
     
     EXPECT_EQ(mConn.sendMessage(pipefd[1],mess), true);
     Message res;
     EXPECT_EQ(mConn.getMessage(pipefd[1],res), true);
 
-    EXPECT_EQ(res.getType(), Message::Type::RESPONSE);
-    EXPECT_EQ(res.getCommand(), Message::Command::START);
-    EXPECT_EQ(res.getArgument(), Message::Argument::POSITIVE);
+    EXPECT_EQ(res.getType(), Message::Type::typeRESPONSE);
+    EXPECT_EQ(res.getCommand(), Message::Command::commSTART);
+    EXPECT_EQ(res.getArgument(), Message::Argument::argPOSITIVE);
     int port = -1;
     EXPECT_EQ(res.getData(port), true);
     EXPECT_EQ(port, mNode.getIperfPort());
@@ -219,17 +225,17 @@ TEST(ConnectionsTest, RStartEstimate) {
 
     Message mess;
     mess.setSender(nodeN);
-    mess.setType(Message::Type::REQUEST);
-    mess.setCommand(Message::Command::START);
-    mess.setArgument(Message::Argument::ESTIMATE);
+    mess.setType(Message::Type::typeREQUEST);
+    mess.setCommand(Message::Command::commSTART);
+    mess.setArgument(Message::Argument::argESTIMATE);
     
     EXPECT_EQ(mConn.sendMessage(pipefd[1],mess), true);
     Message res;
     EXPECT_EQ(mConn.getMessage(pipefd[1],res), true);
 
-    EXPECT_EQ(res.getType(), Message::Type::RESPONSE);
-    EXPECT_EQ(res.getCommand(), Message::Command::START);
-    EXPECT_EQ(res.getArgument(), Message::Argument::POSITIVE);
+    EXPECT_EQ(res.getType(), Message::Type::typeRESPONSE);
+    EXPECT_EQ(res.getCommand(), Message::Command::commSTART);
+    EXPECT_EQ(res.getArgument(), Message::Argument::argPOSITIVE);
     Message::node val;
     EXPECT_EQ(res.getData(val), true);
     EXPECT_EQ(stol(val.port), mNode.getEstimatePort());
@@ -252,9 +258,9 @@ TEST(ConnectionsTest, RSetNodes) {
 
     Message mess;
     mess.setSender(nodeN);
-    mess.setType(Message::Type::REQUEST);
-    mess.setCommand(Message::Command::SET);
-    mess.setArgument(Message::Argument::NODES);
+    mess.setType(Message::Type::typeREQUEST);
+    mess.setCommand(Message::Command::commSET);
+    mess.setArgument(Message::Argument::argNODES);
     vector<Message::node> strings;
     strings.push_back(Message::node("test","",""));
     mess.setData(strings);
@@ -263,9 +269,9 @@ TEST(ConnectionsTest, RSetNodes) {
     Message res;
     EXPECT_EQ(mConn.getMessage(pipefd[1],res), true);
 
-    EXPECT_EQ(res.getType(), Message::Type::RESPONSE);
-    EXPECT_EQ(res.getCommand(), Message::Command::SET);
-    EXPECT_EQ(res.getArgument(), Message::Argument::POSITIVE);
+    EXPECT_EQ(res.getType(), Message::Type::typeRESPONSE);
+    EXPECT_EQ(res.getCommand(), Message::Command::commSET);
+    EXPECT_EQ(res.getArgument(), Message::Argument::argPOSITIVE);
     EXPECT_EQ(close(pipefd[1]), 0);
     conn.stop();
 }
@@ -283,17 +289,17 @@ TEST(ConnectionsTest, RGetNodes) {
 
     Message mess;
     mess.setSender(nodeN);
-    mess.setType(Message::Type::REQUEST);
-    mess.setCommand(Message::Command::GET);
-    mess.setArgument(Message::Argument::NODES);
+    mess.setType(Message::Type::typeREQUEST);
+    mess.setCommand(Message::Command::commGET);
+    mess.setArgument(Message::Argument::argNODES);
     
     EXPECT_EQ(mConn.sendMessage(pipefd[1],mess), true);
     Message res;
     EXPECT_EQ(mConn.getMessage(pipefd[1],res), true);
 
-    EXPECT_EQ(res.getType(), Message::Type::RESPONSE);
-    EXPECT_EQ(res.getCommand(), Message::Command::GET);
-    EXPECT_EQ(res.getArgument(), Message::Argument::POSITIVE);
+    EXPECT_EQ(res.getType(), Message::Type::typeRESPONSE);
+    EXPECT_EQ(res.getCommand(), Message::Command::commGET);
+    EXPECT_EQ(res.getArgument(), Message::Argument::argPOSITIVE);
     vector<Message::node> strings;
     EXPECT_EQ(res.getData(strings), true);
     EXPECT_EQ(strings, mNode.getStorage()->getNodes());
@@ -305,7 +311,7 @@ TEST(ConnectionsTest, RGetNodes) {
 class MNode : public Node {
 public:
 
-    MNode() : Node("a",false,0) {}
+    MNode() : Node("a",false,0,false) {}
 
     void promote() {
         sent=true;
@@ -328,17 +334,17 @@ TEST(ConnectionsTest, RGetReport) {
 
     Message mess;
     mess.setSender(nodeN);
-    mess.setType(Message::Type::REQUEST);
-    mess.setCommand(Message::Command::GET);
-    mess.setArgument(Message::Argument::REPORT);
+    mess.setType(Message::Type::typeREQUEST);
+    mess.setCommand(Message::Command::commGET);
+    mess.setArgument(Message::Argument::argREPORT);
     
     EXPECT_EQ(mConn.sendMessage(pipefd[1],mess), true);
     Message res;
     EXPECT_EQ(mConn.getMessage(pipefd[1],res), true);
 
-    EXPECT_EQ(res.getType(), Message::Type::RESPONSE);
-    EXPECT_EQ(res.getCommand(), Message::Command::GET);
-    EXPECT_EQ(res.getArgument(), Message::Argument::POSITIVE);
+    EXPECT_EQ(res.getType(), Message::Type::typeRESPONSE);
+    EXPECT_EQ(res.getCommand(), Message::Command::commGET);
+    EXPECT_EQ(res.getArgument(), Message::Argument::argPOSITIVE);
     Report r;
     string strss;
     res.buildString();
@@ -378,9 +384,9 @@ TEST(ConnectionsTest, NUpdateNodes) {
     conn.request(pipefd[0]);
 
     Message mess;
-    mess.setType(Message::Type::NOTIFY);
-    mess.setCommand(Message::Command::UPDATE);
-    mess.setArgument(Message::Argument::NODES);
+    mess.setType(Message::Type::typeNOTIFY);
+    mess.setCommand(Message::Command::commUPDATE);
+    mess.setArgument(Message::Argument::argNODES);
     vector<Message::node> stringsA;
     stringsA.push_back(Message::node("test","",""));
     stringsA.push_back(Message::node("test2","",""));
@@ -406,9 +412,9 @@ TEST(ConnectionsLeaderTest, sendChangeRoleTest) {
     conn.request(pipefd[0]);
 
     Message mess;
-    mess.setType(Message::Type::REQUEST);
-    mess.setCommand(Message::Command::SET);
-    mess.setArgument(Message::Argument::ROLES);
+    mess.setType(Message::Type::typeREQUEST);
+    mess.setCommand(Message::Command::commSET);
+    mess.setArgument(Message::Argument::argROLES);
 
     Message::leader_update update;
     update.selected.push_back(Message::node("a","b","c"));

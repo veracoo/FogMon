@@ -41,7 +41,7 @@ def calculate_distance_matrix(sample):
 print("starting db test")
 
 import sqlite3
-conn = sqlite3.connect('leader_node.db')
+conn = sqlite3.connect('monitoring.db')
 c = conn.cursor()
 
 Nodes = c.execute('SELECT * FROM MNodes').fetchall()

@@ -25,7 +25,7 @@ using namespace std;
 Server::Server(IConnections *conn, int port) {
     running = false;
     portC = port;
-    efd = eventfd(0,0);
+    efd = eventfd(0,0);                         // efd = Event File Descriptor : per gestione comunicazione tra processi
     this->connection = conn;
 }
 
@@ -51,7 +51,9 @@ void Server::stop() {
 
 void Server::listener() {
 
-    signal(SIGPIPE, SIG_IGN);
+    signal(SIGPIPE, SIG_IGN);                                       // ignore SIPIPE signal (it is sent to a process when the process attempts
+                                                                    // to write to a pipe whose read end is closed. The default action is to 
+                                                                    // terminate the process.
 
     int error, on = 1;
     int listen_sd = -1, new_sd = -1;
@@ -62,7 +64,7 @@ void Server::listener() {
     int nfds = 0, current_size = 0, i, j;
     this->running = true;
     //create an AF_INET6 stream socket for listening
-    listen_sd = socket(AF_INET6, SOCK_STREAM, 0);
+    listen_sd = socket(AF_INET6, SOCK_STREAM, 0);                   // create socket
     if (listen_sd < 0)
     {
         perror("socket() failed");
@@ -87,7 +89,7 @@ void Server::listener() {
         exit(-1);
     }
 
-    //bind
+    //bind                                                          // bind socket
     memset(&addr, 0, sizeof(addr));
     addr.sin6_family = AF_INET6;
     memcpy(&addr.sin6_addr, &in6addr_any, sizeof(in6addr_any));
@@ -102,7 +104,7 @@ void Server::listener() {
     }
 
     //set queue size for listening
-    error = listen(listen_sd, 32);
+    error = listen(listen_sd, 32);                                   
     if (error < 0)
     {
         perror("listen() failed");

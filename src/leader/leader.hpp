@@ -11,8 +11,9 @@ class LeaderFactory;
 #include "ileader.hpp"
 #include "selector.hpp"
 
-class Leader : virtual public ILeader, public Follower {
+class Leader : virtual public ILeader, virtual public Follower {
 public:
+    Leader();
     Leader(Message::node node, int nThreads);
     ~Leader();
 
@@ -35,13 +36,15 @@ public:
     virtual void changeRoles(Message::leader_update update);
     virtual void changeRole(std::vector<Message::node> leaders);
 protected:
-    void timerFun();
+    virtual void timerFun();
 
     //for the leader selection algorithms
     Selector selector;
 
     int iter;
+
     std::thread timerFunThread;
+    
     int lastQuality; 
 
     LeaderConnections *connections;

@@ -1,14 +1,15 @@
 #include "node.hpp"
 #include "leader.hpp"
 #include "follower.hpp"
+#include "adaptive_follower.hpp"
+#include "adaptive_leader.hpp"
 
 #include <iostream>
 #include <unistd.h>
 
 using namespace std;
 
-Node::Node(string port, bool isLeader, int threads) {
-    this->timeReport = 30;
+Node::Node(string port, bool isLeader, int threads, bool adp) {
     this->timeTests = 30;
     this->timeLatency = 30;
     this->maxPerLatency = 100;
@@ -16,7 +17,7 @@ Node::Node(string port, bool isLeader, int threads) {
     this->maxPerBandwidth = 1;
     this->leaderCheck = 10;
 
-    this->timePropagation = 20;
+    this->timePropagation = 10;
     this->timesilent = 120;
     this->interfaceIp = "";
     this->session = 0;
@@ -28,6 +29,7 @@ Node::Node(string port, bool isLeader, int threads) {
     this->leaderFormula = 0;
 
     this->isLeader = isLeader;
+    this->adp = adp;
     this->agent = NULL;
     this->port = port;
     this->threads = threads;
@@ -35,7 +37,8 @@ Node::Node(string port, bool isLeader, int threads) {
 
     cout << "Generated id: "<< this->id << endl;
 
-    unlink("leader_node.db");
+    unlink("monitoring.db");
+    unlink("adaptive_storage.db");
 
     this->create();
 
@@ -60,15 +63,29 @@ void Node::stop() {
 
 void Node::create() {
     if(isLeader) {
-        cout << "Starting Leader" << endl;
-        Leader * agent1 = new Leader(Message::node(this->id,"::1",this->port), this->threads);
-        agent1->initialize();
-        this->agent = agent1;
+        if(adp){
+            cout << "Starting Adaptive Leader..." << endl;
+            AdaptiveLeader * agent1 = new AdaptiveLeader(Message::node(this->id,"::1",this->port), this->threads);
+            agent1->initialize();
+            this->agent = agent1;
+        }else{
+            cout << "Starting Leader..." << endl;
+            Leader * agent1 = new Leader(Message::node(this->id,"::1",this->port), this->threads);
+            agent1->initialize();
+            this->agent = agent1;
+        }
     }else {
-        cout << "Starting Follower" << endl;
-        Follower * agent1 = new Follower(Message::node(this->id,"::1",this->port), this->threads);
-        agent1->initialize();
-        this->agent = agent1;
+        if(adp){
+            cout << "Starting Adaptive Follower..." << endl;
+            AdaptiveFollower * agent1 = new AdaptiveFollower(Message::node(this->id,"::1",this->port), this->threads);
+            agent1->initialize();
+            this->agent = agent1;
+        }else{
+            cout << "Starting Follower..." << endl;
+            Follower * agent1 = new Follower(Message::node(this->id,"::1",this->port), this->threads);
+            agent1->initialize();
+            this->agent = agent1;
+        }
     }
     this->agent->setParent(this);
 }
@@ -118,6 +135,10 @@ bool Node::isFollower() {
     return !this->isLeader;
 }
 
+bool Node::isAdaptive() {
+    return this->adp;
+}
+
 extern "C"
 {
 #ifdef WIN32
@@ -150,6 +171,20 @@ std::string newUUID()
 
 string Node::genId() {
     return newUUID();
+}
+
+
+bool Node::setParam(std::string name, std::vector<std::string> value){
+    if(name == string("mg_options")){
+        this->mg_options = value;
+    } else if(name == string("options")) {
+        this->options = value;
+    }else if(name == string("m_en_dis_options")){
+        this->m_en_dis_options = value;
+    } else{
+        return false;
+    }
+    return true;
 }
 
 bool Node::setParam(std::string name, std::string value){

@@ -1,10 +1,14 @@
 #include "selector.hpp"
 #include "leader.hpp"
 #include <cmath>
+#include <iostream>
 
 #include "uiconnection.hpp"
 
 using namespace std;
+
+Selector::Selector() {}
+
 Selector::Selector(ILeader *leader) {
     this->parent = leader;
     status = FREE;
@@ -124,7 +128,6 @@ bool Selector::updateSelection(Message::leader_update update) {
 }
 
 bool Selector::checkSelection(bool qualityCheck, bool doit) {
-
     if(doit) {
         printf("STARTING SELECTION (forced)\n");
         this->startSelection();

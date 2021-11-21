@@ -23,9 +23,9 @@ public:
 
         Message res;
 
-        if( m.getType()==Message::Type::REQUEST &&
-            m.getCommand() == Message::Command::GET &&
-            m.getArgument() == Message::Argument::NODES) {
+        if( m.getType()==Message::Type::typeREQUEST &&
+            m.getCommand() == Message::Command::commGET &&
+            m.getArgument() == Message::Argument::argNODES) {
             
             
         }else {

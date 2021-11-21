@@ -31,6 +31,10 @@
 using namespace std;
 using namespace rapidjson;
 
+int Follower::nUpdate = 0;
+
+Follower::Follower() {}
+
 Follower::Follower(Message::node node, int nThreads) : IAgent() {
     this->nThreads = nThreads;
 
@@ -50,11 +54,13 @@ void Follower::initialize(Factory* fact) {
     }else {
         this->factory = fact;
     }
+
     if(this->storage == NULL)
-        this->storage = this->factory->newStorage("leader_node.db");
-    if(this->connections == NULL) {
+        this->storage = this->factory->newStorage("monitoring.db");
+
+    if(this->connections == NULL)
         this->connections = this->factory->newConnections(this->nThreads);
-    }
+    
     this->connections->initialize(this);
     this->server = this->factory->newServer(this->connections,5555);
 }
@@ -79,6 +85,7 @@ void Follower::start(vector<Message::node> mNodes) {
     IAgent::start(mNodes);
     this->server->start();
     srandom(time(nullptr));
+
 
     if(this->startEstimate() != 0) {
         fprintf(stderr,"Cannot start the estimate\n");
@@ -283,7 +290,6 @@ int Follower::startIperf() {
 
 int Follower::startEstimate() {
     
-    
     int port = random()%2000 + 5600;
 
     port = 8366;
@@ -459,7 +465,7 @@ float Follower::testBandwidthEstimate(string ip, string myIp, float old) {
     return ret;
 }
 
-int Follower::testPing(string ip) {
+int Follower::testPing(string ip) {     // restituisce la latenza con il nodo passato come argomento
     char command[1024];
     sprintf(command, "ping -c 3 %s 2>&1", ip.c_str());
     string mode = "r";
@@ -503,12 +509,11 @@ int Follower::testPing(string ip) {
 }
 
 void Follower::getHardware() {
-
     int status, i;
     sigar_t *sigar;
     sigar_cpu_t cpuT1;
     sigar_cpu_t cpuT2;
-    sigar_cpu_list_t cpulist;
+    sigar_cpu_list_t cpulist;               // number of cores
 
     sigar_open(&sigar);
     sigar_file_system_usage_t disk;
@@ -549,43 +554,49 @@ void Follower::getHardware() {
     hardware.disk = disk.total;
     hardware.mean_free_disk = disk.avail;
 
-    this->storage->saveHardware(hardware, this->node->hardwareWindow);
+    this->storage->saveHardware(hardware, this->node->hardwareWindow);          // save hardware data on DB
 
     sigar_cpu_list_destroy(sigar, &cpulist);
-
     sigar_close(sigar);
 }
 
 void Follower::timer() {
     int iter=0;
     while(this->running) {
+
         auto t_start = std::chrono::high_resolution_clock::now();
+
         //generate hardware report and send it
         this->getHardware();
-        std::optional<std::pair<int64_t,Message::node>> ris = this->connections->sendUpdate(this->nodeS, this->update);
-        if(ris == nullopt) {
+
+        std::optional<std::pair<int64_t,Message::node>> ris = this->connections->sendUpdate(this->nodeS, this->update); // manda update al nodo leader
+        if(ris == nullopt) {           // il messaggio di update non ha ottenuto ack
             cout << "update retry..." << endl;
-            ris = this->connections->sendUpdate(this->nodeS,this->update);
+            ris = this->connections->sendUpdate(this->nodeS,this->update);  
             if(ris == nullopt) {
                 //change server
                 cout << "Changing server..." << endl;
-                if(!selectServer(this->node->getMNodes())) {
+                if(!selectServer(this->node->getMNodes())) {        // cerca un nuovo leader
                     cout << "Failed to find a server!!!!!!!!" << endl;
                 }
                 iter=0;
             }
         }
 
-        if(ris != nullopt) {
+        if(ris != nullopt) {    // l'update è andato a buon fine
+            nUpdate += 1;
+            cout << "Number of updates sent until now: " << nUpdate << endl;
+
+            // aggiorna variabile membro 'update'
             this->update.first= (*ris).first;
             this->update.second= (*ris).second;
         }
 
         //every 10 iterations ask the nodes in case the server cant reach this network
         if(iter%10 == 0) {
-            vector<Message::node> ips = this->connections->requestNodes(this->nodeS);
-            vector<Message::node> tmp = this->getStorage()->getNodes();
-            vector<Message::node> rem;
+            vector<Message::node> ips = this->connections->requestNodes(this->nodeS);   // chiede al Leader gli ip dei Follower nel suo gruppo
+            vector<Message::node> tmp = this->getStorage()->getNodes();                 // nodi già conosciuti dal Follower
+            vector<Message::node> rem;                                                  // nodi da rimuovere dai nodi conosciuti dal Follower (tmp -ips)
 
             for(auto node : tmp) {
                 bool found = false;
@@ -600,21 +611,22 @@ void Follower::timer() {
                 }
             }
 
-            this->getStorage()->updateNodes(ips,rem);
+            this->getStorage()->updateNodes(ips,rem);       // aggiunge nodi nuovi (ips)        
+                                                            // elimina dallo storage i nodi che non vengono restituiti dal leader (rem)
         }
 
         //every leaderCheck iterations update the MNodes
         if(iter% this->node->leaderCheck == this->node->leaderCheck-1) {
-            vector<Message::node> res = this->connections->requestMNodes(this->nodeS);
+            vector<Message::node> res = this->connections->requestMNodes(this->nodeS);  // chiede al Leader gli ip di tutti i Leader della rete
             if(!res.empty()) {
                 for(int j=0; j<res.size(); j++)
                 {
                     if(res[j].ip==std::string("::1")||res[j].ip==std::string("127.0.0.1"))
-                        res[j].ip = this->nodeS.ip;
+                        res[j].ip = this->nodeS.ip;         // sostituzione ip locale del leader con ip esterno
                 }
-                this->node->setMNodes(res);
+                this->node->setMNodes(res);                 // aggiornamento dei nodi leader conosciuti
                 cout << "Check server" << endl;
-                bool change = this->checkServer(res);
+                bool change = this->checkServer(res);       // controlla se c'è un nodo con latenza minore e nel caso cambia Leader/gruppo
                 if(change) {
                     cout << "Changing server" << endl;
                     if(!selectServer(res)) {
@@ -635,6 +647,7 @@ void Follower::timer() {
         //     this->startIperf();
         // }
 
+        
         if(iter % 3 == 0) {
             string out = this->pIperf->readoutput();
             cout << "Iperf restart" << endl;
@@ -642,12 +655,20 @@ void Follower::timer() {
             this->pIperf = NULL;
             this->startIperf();
         }
+        
+        
 
         auto t_end = std::chrono::high_resolution_clock::now();
         auto elapsed_time = std::chrono::duration_cast<std::chrono::duration<float>>(t_end-t_start).count();
         int sleeptime = this->node->timeReport-elapsed_time;
+        
+        
+        //cout << "Time report: " << this->node->timeReport << endl;
+        
+
         if (sleeptime > 0)
             sleeper.sleepFor(chrono::seconds(sleeptime));
+
         iter++;
     }
 }
@@ -693,7 +714,7 @@ void Follower::TestTimer() {
             LatencyThreads.push_back(move(LatencyThread));
         }
 
-
+        
         //start thread for bandwidth tests
         thread BandwidthThread = thread([this]{
             //test bandwidth
@@ -701,7 +722,7 @@ void Follower::TestTimer() {
             vector<Message::node> ips = this->storage->getLRBandwidth(this->node->maxPerBandwidth + 5, this->node->timeBandwidth);
             cout << "List B: ";
             for(auto node : ips) {
-                cout << node.ip << " ";
+                //cout << node.ip << " ";
             }
             cout << endl;
             int i=0;
@@ -725,13 +746,16 @@ void Follower::TestTimer() {
                 i++;
             }
         });
+        
+    
 
         for(auto &LatencyThread : LatencyThreads) {
             LatencyThread.join();
         }
         
+        
         BandwidthThread.join();
-
+        
 
         sleeper.sleepFor(chrono::seconds(this->node->timeTests));
         iter++;

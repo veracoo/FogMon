@@ -6,7 +6,7 @@
 #include "message.hpp"
 #include "report.hpp"
 
-class LeaderStorage : public Storage, virtual public ILeaderStorage {
+class LeaderStorage : virtual public Storage, virtual public ILeaderStorage {
 protected:
     virtual void createTables();
     void addTest(Message::node nodeA, Message::node nodeB, Report::test_result test, std::string type);

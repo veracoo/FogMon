@@ -10,9 +10,9 @@ from clusterer import quality
 
 from shutil import copyfile
 
-copyfile("leader_node.db", "leader_node_copy.db")
+copyfile("monitoring.db", "monitoring_copy.db")
 
-conn = sqlite3.connect('leader_node_copy.db')
+conn = sqlite3.connect('monitoring_copy.db')
 c = conn.cursor()
 
 Nodes = c.execute('SELECT * FROM MNodes').fetchall()

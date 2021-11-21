@@ -14,7 +14,10 @@ public:
 
     bool sendTopology(std::vector<Report::report_result> report);
     bool sendChangeRole(Message::leader_update update);
-private:
+protected:
+    static size_t WriteCallback(void *contents, size_t size, size_t nmemb, void *userp);
+    bool sendToInterface(std::string ip,std::string str);
+
     std::string ip;
     Message::node myNode;
     int session;

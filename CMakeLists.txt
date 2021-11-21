@@ -8,7 +8,7 @@ endif()
 
 project(FogMon CXX)
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src ${CMAKE_CURRENT_SOURCE_DIR}/src/follower ${CMAKE_CURRENT_SOURCE_DIR}/src/leader ${CMAKE_CURRENT_SOURCE_DIR}/rapidjson/include ${CMAKE_CURRENT_SOURCE_DIR}/sigar/include)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src ${CMAKE_CURRENT_SOURCE_DIR}/src/follower ${CMAKE_CURRENT_SOURCE_DIR}/src/leader ${CMAKE_CURRENT_SOURCE_DIR}/src/clips ${CMAKE_CURRENT_SOURCE_DIR}/rapidjson/include ${CMAKE_CURRENT_SOURCE_DIR}/sigar/include)
 
 file(GLOB SRCS "src/*.cpp")
 file(GLOB HDRS "src/*.hpp")
@@ -36,11 +36,16 @@ file(GLOB HDRS_MICROBIT "src/microbit/*.hpp")
 file(GLOB SRCS_LEADER "src/leader/*.cpp")
 file(GLOB HDRS_LEADER "src/leader/*.hpp")
 
-add_executable(FogMon src/main/main.cpp ${SRCS} ${HDRS} ${SRCS_NODE} ${HDRS_NODE} ${SRCS_LEADER} ${HDRS_LEADER}  ${SRCS_MICROBIT} ${HDRS_MICROBIT})
+file(GLOB SRCS_CLIPS "src/clips/*.c")
+file(GLOB HDRS_CLIPS "src/clips/*.h")
 
-#add_executable(FogMonNode src/main/node_main.cpp ${SRCS} ${HDRS} ${SRCS_NODE} ${HDRS_NODE} ${SRCS_LEADER} ${HDRS_LEADER}  ${SRCS_MICROBIT} ${HDRS_MICROBIT})
+SET_SOURCE_FILES_PROPERTIES(${SRCS_CLIPS} PROPERTIES LANGUAGE CXX )
 
-#add_executable(FogMonServer src/main/leader_main.cpp ${SRCS} ${HDRS} ${SRCS_NODE} ${HDRS_NODE} ${SRCS_LEADER} ${HDRS_LEADER} ${SRCS_MICROBIT} ${HDRS_MICROBIT})
+add_executable(FogMon src/main/main.cpp ${SRCS} ${HDRS} ${SRCS_NODE} ${HDRS_NODE} ${SRCS_LEADER} ${HDRS_LEADER} ${SRCS_MICROBIT} ${HDRS_MICROBIT} ${SRCS_CLIPS} ${HDRS_CLIPS})
+
+#add_executable(FogMonNode src/main/node_main.cpp ${SRCS} ${HDRS} ${CLP} ${SRCS_NODE} ${HDRS_NODE} ${SRCS_LEADER} ${HDRS_LEADER} ${SRCS_MICROBIT} ${HDRS_MICROBIT})
+
+#add_executable(FogMonServer src/main/leader_main.cpp ${SRCS} ${HDRS} ${CLP} ${SRCS_NODE} ${HDRS_NODE} ${SRCS_LEADER} ${HDRS_LEADER} ${SRCS_MICROBIT} ${HDRS_MICROBIT})
 
 include_directories(/usr/include)
 link_directories(/usr/lib)

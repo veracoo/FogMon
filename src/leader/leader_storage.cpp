@@ -97,7 +97,7 @@ std::vector<Message::node> LeaderStorage::getAllNodes() {
     return nodes;
 }
 
-vector<Message::node> LeaderStorage::getNodes() {
+vector<Message::node> LeaderStorage::getNodes() {    // restituisce nodi monitorati dal Leader (i.e. i suoi Follower)
     char *zErrMsg = 0;
     char buf[1024];
     std::sprintf(buf,"SELECT id,ip,port FROM MNodes WHERE monitoredBy = \"%s\"",this->nodeM.id.c_str());
@@ -476,6 +476,11 @@ vector<Message::node> LeaderStorage::removeOldNodes(int seconds) {
 }
 
 void LeaderStorage::removeChangeRole(std::vector<Message::node> leaders) {
+    cout << "removeChangeRole()" << endl;
+    cout << "Leaders:" << endl;
+    for(auto &l : leaders){
+        cout << l.ip << endl;
+    }
     std::vector<Message::node> nodes = this->getMNodes();
     std::vector<Message::node> vec;
     for(auto node : nodes) {

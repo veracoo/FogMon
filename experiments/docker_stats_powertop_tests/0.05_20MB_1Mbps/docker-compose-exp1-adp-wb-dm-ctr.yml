@@ -1,0 +1,51 @@
+version: '2'
+services:
+  leader:
+    build:
+      context: ../../../
+      dockerfile: Dockerfile.adp
+    command: bash -c "tc qdisc add dev eth0 root tbf rate 1mbit burst 32kbit latency 400ms & /FogMon --leader -i 131.114.72.76:8248 -s 10 --adp --ex1"
+    stdin_open: true
+    networks:
+      default:
+    expose:
+      - "1024-65535"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.05'
+          memory: 20M
+    cap_add:
+      - NET_ADMIN
+
+  follower:
+    build:
+      context: ../../../
+      dockerfile: Dockerfile.adp
+    command: bash -c "tc qdisc add dev eth0 root tbf rate 1mbit burst 32kbit latency 400ms & /FogMon -C leader -i 131.114.72.76:8248 -s 10 --adp --ex1 --dm --ctr --wb"
+    stdin_open: true
+    depends_on:
+      - leader
+    networks:
+      default:
+    expose:
+      - "1024-65535"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.05'
+          memory: 20M
+    cap_add:
+      - NET_ADMIN
+
+networks:
+  default:
+    driver: bridge
+    enable_ipv6: true
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.16.238.0/24
+          gateway: 172.16.238.1
+        - subnet: 2001:3984:3989::/64
+          gateway: 2001:3984:3989::1

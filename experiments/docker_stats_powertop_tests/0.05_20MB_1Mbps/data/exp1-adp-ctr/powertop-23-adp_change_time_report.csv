@@ -1,0 +1,266 @@
+____________________________________________________________________
+			P o w e r T O P
+
+____________________________________________________________________
+ *  *  *   System Information   *  *  *
+
+PowerTOP Version;v2.11-1-g7ef7f79 ran at Thu Oct 28 13:24:52 2021
+
+Kernel Version;Linux version 5.11.0-38-generic
+System Name;Microsoft CorporationVirtual MachineHyper-V UEFI Release v4.0
+CPU Information;4 Intel(R) Core(TM) i7-9700 CPU @ 3.00GHz
+OS Information;Ubuntu 20.04 LTS
+
+Target: 1 units/s;System:  145.9 wakeup/s;CPU:  2.2% usage;GPU: 0 ops/s;GFX: 4.1 wakeups/s;VFS: 0 ops/s;
+
+____________________________________________________________________
+ *  *  *   Top 10 Power Consumers   *  *  *
+
+Usage;Events/s;Category;Description;PW Estimate
+  0,0%; 13,6;Timer;tick_sched_timer; 53.3 mW  
+  0,0%; 12,9;kWork;psi_avgs_work; 50.5 mW  
+  0,3%; 12,1;Process;[PID 23968] /usr/lib/firefox/firefox -new-window ; 50.0 mW  
+  0,2%; 10,9;Process;[PID 85365] docker-compose up --build ; 44.7 mW  
+  0,0%;  9,6;Process;[PID 683] /usr/bin/containerd ; 37.7 mW  
+  0,2%;  8,2;Process;[PID 1810] /usr/bin/gnome-shell ; 33.8 mW  
+  0,0%;  7,2;Process;[PID 753] /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock ; 28.4 mW  
+  0,1%;  6,0;Timer;hrtimer_wakeup; 24.2 mW  
+  0,0%;  5,9;Process;[PID 4283] /usr/bin/containerd ; 23.5 mW  
+  0,0%;  5,7;Process;[PID 13] [rcu_sched]; 22.3 mW  
+
+____________________________________________________________________
+ *  *  *   Processor Idle State Report   *  *  *
+
+Package;0
+;
+;
+;
+
+CPU;0
+CPU;1
+CPU;2
+CPU;3
+;;
+;;
+;;
+;;
+;;
+;;
+;;
+;;
+;;
+;;
+;;
+;;
+
+____________________________________________________________________
+ *  *  *   Processor Frequency Report   *  *  *
+
+Package;0
+Idle; 100,0% 
+;
+;
+;
+;
+
+CPU 0
+Idle; 100,0% 
+CPU 1
+Idle; 100,0% 
+CPU 2
+Idle; 100,0% 
+CPU 3
+Idle; 100,0% 
+;
+;
+;
+;
+;
+;
+;
+;
+
+____________________________________________________________________
+ *  *  *   Overview of Software Power Consumers   *  *  *
+
+Usage;Wakeups/s;GPU ops/s;Disk IO/s;GFX Wakeups/s;Category;Description;PW Estimate
+328,3 us/s; 13,6;;;;Timer;tick_sched_timer; 53.3 mW  
+ 68,2 us/s; 12,9;;;;kWork;psi_avgs_work; 50.5 mW  
+  2,6 ms/s; 12,1;;;  0,3;Process;[PID 23968] /usr/lib/firefox/firefox -new-window ; 50.0 mW  
+  2,0 ms/s; 10,9;;;;Process;[PID 85365] docker-compose up --build ; 44.7 mW  
+250,4 us/s;  9,6;;;;Process;[PID 683] /usr/bin/containerd ; 37.7 mW  
+  1,9 ms/s;  8,2;;;  2,3;Process;[PID 1810] /usr/bin/gnome-shell ; 33.8 mW  
+138,6 us/s;  7,2;;;;Process;[PID 753] /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock ; 28.4 mW  
+  0,8 ms/s;  6,0;;;;Timer;hrtimer_wakeup; 24.2 mW  
+343,3 us/s;  5,9;;;;Process;[PID 4283] /usr/bin/containerd ; 23.5 mW  
+ 48,1 us/s;  5,7;;;;Process;[PID 13] [rcu_sched]; 22.3 mW  
+  0,8 ms/s;  4,3;;;  0,7;Process;[PID 2091] /usr/libexec/gnome-terminal-server ; 17.8 mW  
+  0,7 ms/s;  4,2;;;;Process;[PID 24196] /usr/lib/firefox/firefox -contentproc -childID 4 -isForBrowser -prefsLen 8242 -prefMapSize 244561 -jsInit 286204 -p; 17.3 mW  
+255,7 us/s;  4,1;;;;Process;[PID 726] /usr/bin/containerd ; 16.2 mW  
+  1,4 ms/s;  2,5;;;  0,7;Process;[PID 3331] /usr/bin/nautilus --gapplication-service ; 11.3 mW  
+110,4 us/s;  2,7;;;;Interrupt;[6] tasklet(softirq); 10.6 mW  
+ 32,3 us/s;  2,4;;;;kWork;flush_to_ldisc; 9.58 mW  
+  0,8 ms/s;  2,1;;;;Process;[PID 755] /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock ; 8.99 mW  
+236,7 us/s;  1,9;;;;Process;[PID 24100] /usr/lib/firefox/firefox -contentproc -childID 2 -isForBrowser -prefsLen 4882 -prefMapSize 244561 -jsInit 286204 -p; 7.64 mW  
+  0,7 ms/s;  1,6;;;;Process;[PID 6296] /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock ; 7.16 mW  
+119,4 us/s;  1,7;;;;Process;[PID 24203] /usr/lib/firefox/firefox -contentproc -childID 4 -isForBrowser -prefsLen 8242 -prefMapSize 244561 -jsInit 286204 -p; 6.75 mW  
+ 26,9 us/s;  1,7;;;;Process;[PID 42] [kcompactd0]; 6.65 mW  
+569,6 us/s;  1,3;;;  0,0;Process;[PID 1240] /usr/bin/gnome-shell ; 5.64 mW  
+424,3 us/s;  1,2;;;;Process;[PID 762] /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock ; 5.30 mW  
+ 14,9 us/s;  1,2;;;;kWork;blk_mq_run_work_fn; 4.69 mW  
+ 80,6 us/s;  1,1;;;;Process;[PID 87150] /FogMon --leader -i 131.114.72.76:8248 -s 10 --adp --b --c --d --m --lt --bw --ciots ; 4.37 mW  
+ 31,1 us/s;  1,0;;;;Process;[PID 1138] /usr/libexec/gvfs-afc-volume-monitor ; 3.93 mW  
+ 24,5 us/s;  1,0;;;;Process;[PID 1549] /usr/libexec/gvfs-afc-volume-monitor ; 3.92 mW  
+ 25,0 us/s;  0,8;;;;Process;[PID 336] [hv_balloon]; 3.34 mW  
+349,4 us/s;  0,6;;;;Process;[PID 87148] /FogMon --leader -i 131.114.72.76:8248 -s 10 --adp --b --c --d --m --lt --bw --ciots ; 2.88 mW  
+105,8 us/s;  0,7;;;;Process;[PID 87169] /usr/bin/containerd-shim-runc-v2 -namespace moby -id eb8572450f7286c42dca599077eda21efc8ad4abba2d51f7a4ddb9a692cbe0; 2.83 mW  
+374,7 us/s;  0,5;;;;Process;[PID 87283] /FogMon -C leader -i 131.114.72.76:8248 -s 10 --adp --b --c --d --m --lt --bw --ciots ; 2.32 mW  
+ 57,9 us/s;  0,5;;;;Process;[PID 87122] /usr/bin/containerd-shim-runc-v2 -namespace moby -id 75504438c04823a99611eae55d454035856ccf11470a036d1c314dc39770ec; 2.20 mW  
+  8,5 us/s;  0,5;;;;kWork;free_work; 1.96 mW  
+244,2 us/s;  0,4;;;;Process;[PID 1459] /usr/libexec/tracker-miner-fs ; 1.80 mW  
+ 37,8 us/s;  0,4;;;;kWork;vmstat_shepherd; 1.79 mW  
+ 22,6 us/s;  0,4;;;;Process;[PID 87162] /usr/bin/containerd-shim-runc-v2 -namespace moby -id eb8572450f7286c42dca599077eda21efc8ad4abba2d51f7a4ddb9a692cbe0; 1.78 mW  
+ 12,2 us/s;  0,4;;;;kWork;blk_mq_requeue_work; 1.77 mW  
+295,3 us/s;  0,3;;;;Interrupt;[7] sched(softirq); 1.66 mW  
+ 39,8 us/s;  0,4;;;;Process;[PID 24064] /usr/lib/firefox/firefox -contentproc -childID 1 -isForBrowser -prefsLen 102 -prefMapSize 244561 -jsInit 286204 -pa; 1.60 mW  
+ 34,9 us/s;  0,4;;;;Process;[PID 24170] /usr/lib/firefox/firefox -contentproc -childID 3 -isForBrowser -prefsLen 5619 -prefMapSize 244561 -jsInit 286204 -p; 1.59 mW  
+ 29,7 us/s;  0,4;;;;Process;[PID 24107] /usr/lib/firefox/firefox -contentproc -childID 2 -isForBrowser -prefsLen 4882 -prefMapSize 244561 -jsInit 286204 -p; 1.59 mW  
+153,7 us/s;  0,3;;;;Interrupt;[3] net_rx(softirq); 1.52 mW  
+ 69,2 us/s;  0,3;;;;Process;[PID 88269] ping; 1.43 mW  
+ 29,3 us/s;  0,3;;;;Process;[PID 2118] /opt/sublime_text/sublime_text --multiinstance ; 1.39 mW  
+595,2 us/s; 0,20;;;;Process;[PID 774] /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock ; 1.37 mW  
+ 82,4 us/s; 0,30;;;;Process;[PID 24055] /usr/lib/firefox/firefox -contentproc -childID 1 -isForBrowser -prefsLen 102 -prefMapSize 244561 -jsInit 286204 -pa; 1.25 mW  
+ 74,6 us/s; 0,30;;;;Process;[PID 24163] /usr/lib/firefox/firefox -contentproc -childID 3 -isForBrowser -prefsLen 5619 -prefMapSize 244561 -jsInit 286204 -p; 1.24 mW  
+ 13,8 us/s; 0,30;;;;Process;[PID 87136] /FogMon --leader -i 131.114.72.76:8248 -s 10 --adp --b --c --d --m --lt --bw --ciots ; 1.18 mW  
+ 12,8 us/s; 0,30;;;;Process;[PID 538] /usr/lib/accountsservice/accounts-daemon ; 1.18 mW  
+  0,8 ms/s; 0,05;;;;kWork;balloon_up; 1.03 mW  
+ 21,0 us/s; 0,25;;;;Process;[PID 2186] update-notifier ;  995 uW  
+ 18,6 us/s; 0,25;;;;Process;[PID 218] [jbd2/sda1-8];  993 uW  
+ 15,3 us/s; 0,25;;;;Process;[PID 1652] /usr/bin/ibus-daemon --daemonize --xim ;  990 uW  
+ 12,4 us/s; 0,25;;;;Process;[PID 1729] /usr/libexec/xdg-desktop-portal ;  987 uW  
+ 10,0 us/s; 0,25;;;;Process;[PID 1262] ibus-daemon --panel disable --xim ;  984 uW  
+  4,0 us/s; 0,25;;;;kWork;ext4_end_io_rsv_work;  978 uW  
+  0,9 ms/s;;;;;Process;[PID 1504] /usr/lib/xorg/Xorg vt2 -displayfd 3 -auth /run/user/1000/gdm/Xauthority -background none -noreset -keeptty -verbose ;  876 uW  
+ 61,4 us/s; 0,20;;;;Process;[PID 489] /lib/systemd/systemd-resolved ;  841 uW  
+ 40,6 us/s; 0,20;;;;Process;[PID 87274] /usr/libexec/tracker-store ;  820 uW  
+ 16,4 us/s; 0,20;;;;Process;[PID 87049] /usr/bin/containerd-shim-runc-v2 -namespace moby -id 75504438c04823a99611eae55d454035856ccf11470a036d1c314dc39770ec;  796 uW  
+ 12,9 us/s; 0,20;;;;Process;[PID 613] /usr/sbin/NetworkManager --no-daemon ;  792 uW  
+  8,1 us/s; 0,20;;;;Timer;watchdog_timer_fn;  788 uW  
+  7,8 us/s; 0,20;;;;Process;[PID 1057] /usr/libexec/rtkit-daemon ;  787 uW  
+  0,9 us/s; 0,20;;;;kWork;wb_workfn;  780 uW  
+  0,8 us/s; 0,20;;;;kWork;kfree_rcu_work;  780 uW  
+  0,3 us/s; 0,20;;;;kWork;kfree_rcu_monitor;  780 uW  
+ 82,4 us/s; 0,15;;;;Process;[PID 88251] pool-tracker-ex;  667 uW  
+ 29,2 us/s; 0,15;;;;Process;[PID 88231] pool-org.gnome.;  614 uW  
+ 26,1 us/s; 0,15;;;;Process;[PID 88212] StreamT~ns #191;  611 uW  
+ 24,7 us/s; 0,15;;;;Process;[PID 88235] pool-tracker-mi;  609 uW  
+ 16,4 us/s; 0,15;;;;Process;[PID 87277] /usr/libexec/tracker-store ;  601 uW  
+  7,5 us/s; 0,15;;;;Timer;sched_cfs_period_timer;  592 uW  
+  1,9 us/s; 0,15;;;;Process;[PID 88255] powertop --csv=powertop-23-adp_change_time_report.csv ;  587 uW  
+304,9 us/s; 0,05;;;;Process;[PID 88236] tracker-extract;  500 uW  
+ 99,9 us/s; 0,10;;;;Process;[PID 88270] /usr/bin/iperf3 -s -p 5201 ;  490 uW  
+ 69,8 us/s; 0,10;;;;Process;[PID 87137] /FogMon --leader -i 131.114.72.76:8248 -s 10 --adp --b --c --d --m --lt --bw --ciots ;  460 uW  
+ 30,8 us/s; 0,10;;;;Process;[PID 87165] /usr/bin/containerd-shim-runc-v2 -namespace moby -id eb8572450f7286c42dca599077eda21efc8ad4abba2d51f7a4ddb9a692cbe0;  421 uW  
+ 27,5 us/s; 0,10;;;;kWork;netstamp_clear;  417 uW  
+ 19,6 us/s; 0,10;;;;Process;[PID 87149] /FogMon --leader -i 131.114.72.76:8248 -s 10 --adp --b --c --d --m --lt --bw --ciots ;  409 uW  
+ 14,2 us/s; 0,10;;;;Process;[PID 88262] pool-tracker-mi;  404 uW  
+ 12,1 us/s; 0,10;;;;Process;[PID 88260] pool-sublime_te;  402 uW  
+  6,5 us/s; 0,10;;;;Process;[PID 308] /lib/systemd/systemd-udevd ;  396 uW  
+  5,6 us/s; 0,10;;;;Process;[PID 561] /sbin/wpa_supplicant -u -s -O /run/wpa_supplicant ;  395 uW  
+  4,7 us/s; 0,10;;;;Process;[PID 1631] /usr/bin/ssh-agent /usr/bin/im-launch env GNOME_SHELL_SESSION_MODE=ubuntu /usr/bin/gnome-session --systemd --session;  394 uW  
+  2,8 us/s; 0,10;;;;Process;[PID 2145] /opt/sublime_text/plugin_host-3.3 2118 /opt/sublime_text/sublime_text /home/verac/.config/sublime-text /home/verac/.;  393 uW  
+  2,7 us/s; 0,10;;;;Process;[PID 2146] /opt/sublime_text/plugin_host-3.8 2118 /opt/sublime_text/sublime_text /home/verac/.config/sublime-text /home/verac/.;  392 uW  
+  2,4 us/s; 0,10;;;;Process;[PID 44] [khugepaged];  392 uW  
+  1,5 us/s; 0,10;;;;Timer;sched_rt_period_timer;  391 uW  
+  0,6 us/s; 0,10;;;;kWork;lru_add_drain_per_cpu;  390 uW  
+  0,4 us/s; 0,10;;;;kWork;neigh_periodic_work;  390 uW  
+139,0 us/s; 0,05;;;;Process;[PID 88266] FogMon;  334 uW  
+138,1 us/s; 0,05;;;;Process;[PID 1909] /usr/libexec/gsd-housekeeping ;  333 uW  
+ 78,9 us/s; 0,05;;;;Process;[PID 88268] FogMon;  274 uW  
+ 66,6 us/s; 0,05;;;;Process;[PID 88269] sh;  262 uW  
+ 59,3 us/s; 0,05;;;;Process;[PID 83192] [kworker/u8:1];  254 uW  
+ 42,1 us/s; 0,05;;;;Process;[PID 780] /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock ;  237 uW  
+ 33,1 us/s; 0,05;;;;Process;[PID 88268] sh;  228 uW  
+ 29,6 us/s; 0,05;;;;Process;[PID 87163] /usr/bin/containerd-shim-runc-v2 -namespace moby -id eb8572450f7286c42dca599077eda21efc8ad4abba2d51f7a4ddb9a692cbe0;  224 uW  
+ 28,5 us/s; 0,05;;;;Process;[PID 88267] FogMon;  223 uW  
+ 19,0 us/s; 0,05;;;;Process;[PID 87241] /usr/bin/containerd-shim-runc-v2 -namespace moby -id eb8572450f7286c42dca599077eda21efc8ad4abba2d51f7a4ddb9a692cbe0;  214 uW  
+
+
+The system baseline power is estimated at:  591 m W;
+____________________________________________________________________
+ *  *  *   Device Power Report   *  *  *
+
+Usage;Device Name;PW Estimate
+  2,2%;CPU misc;  591 mW   
+  2,2%;CPU core;    0 mW   
+  2,2%;DRAM;    0 mW   
+  1,9 pkts/s;nic:veth425198b;           
+  1,7 pkts/s;nic:vethbfe6210;           
+  1,3 pkts/s;Interfaccia di rete: eth0 (hv_netvsc);           
+  0,2 pkts/s;nic:br-86b975d36824;           
+  0,0%;runtime-kgdboc;           
+  0,0%;runtime-pcspkr;           
+  0,0%;runtime-PNP0003:00;           
+  0,0 pkts/s;nic:docker0;           
+  0,0 pkts/s;Interfaccia di rete: eth1 (hv_netvsc);           
+  0,0%;runtime-serial8250;           
+  0,0%;runtime-alarmtimer.0.auto;           
+  0,0%;runtime-reg-dummy;           
+  0,0%;runtime-efivars.0;           
+  0,0%;runtime-eisa.0;           
+  0,0%;runtime-intel_rapl_msr.0;           
+  0,0%;runtime-Fixed MDIO bus.0;           
+  0,0%;runtime-rtc-efi.0;           
+  0,0%;runtime-intel_pmc_core.0;           
+  0,0%;runtime-VMBUS:00;           
+  0,0%;runtime-efi-framebuffer.0;           
+  0,0%;runtime-HYPER_V_GEN_COUNTER_V1:00;           
+____________________________________________________________________
+ *  *  *   Process Device Activity   *  *  *
+
+Process;Device
+systemd;/dev/autofs
+;/dev/input/event0
+;/dev/input/event1
+;/dev/kmsg
+;/dev/rfkill
+systemd-journal;/dev/kmsg
+;/dev/kmsg
+acpid;/dev/input/event1
+systemd-logind;/dev/input/event0
+;/dev/input/event0
+;/dev/input/event1
+;/dev/input/event1
+;/dev/input/event1
+bpfilter_umh;/dev/kmsg
+gvfsd-fuse;/dev/fuse
+Xorg;/dev/fb0
+;/dev/vga_arbiter
+gsd-rfkill;/dev/rfkill
+gvfsd-fuse;/dev/fuse
+Xorg;/dev/fb0
+;/dev/input/event0
+;/dev/input/event1
+;/dev/vga_arbiter
+xdg-document-po;/dev/fuse
+gsd-rfkill;/dev/rfkill
+;/dev/rfkill
+
+____________________________________________________________________
+ *  *  *   AHCI ALPM Residency Statistics - Not supported on this macine   *  *  *
+
+____________________________________________________________________
+ *  *  *   Software Settings in Need of Tuning   *  *  *
+
+Description;Script
+Timeout del VM writeback;echo '1500' > '/proc/sys/vm/dirty_writeback_centisecs';
+____________________________________________________________________
+ *  *  *   Untunable Software Issues   *  *  *
+
+Description
+____________________________________________________________________
+ *  *  *   Optimal Tuned Software Settings   *  *  *
+
+Description
+NMI watchdog dovrebbe essere disattivato
+

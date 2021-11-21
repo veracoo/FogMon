@@ -9,7 +9,7 @@
 
 #include <thread>
 
-class LeaderConnections : public FollowerConnections, virtual public ILeaderConnections {
+class LeaderConnections : virtual public FollowerConnections, virtual public ILeaderConnections {
 protected:
     void handler(int fd, Message &m);
 

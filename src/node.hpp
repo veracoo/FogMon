@@ -1,19 +1,17 @@
 #ifndef NODE_HPP_
 #define NODE_HPP_
 
-
-
 #include <string>
-
 #include <thread>
+#include <vector>
 #include "message.hpp"
-class IAgent;
 
+class IAgent;
 
 class Node {
 public:
 
-    Node(std::string port, bool isLeader, int threads);
+    Node(std::string port, bool isLeader, int threads, bool adp);
     ~Node();
     //start listener for incoming ping and directions
     void start();
@@ -23,6 +21,9 @@ public:
     bool setParam(std::string name, int value);
     
     bool setParam(std::string name, std::string value);
+
+    // metrics generator options
+    bool setParam(std::string name, std::vector<std::string> value);
 
     //promote to leader if follower
     virtual void promote(std::vector<Message::node> nodes);
@@ -34,6 +35,7 @@ public:
     std::vector<Message::node> getMNodes();
 
     bool isFollower();
+    bool isAdaptive();
 
     //configs
     int timeReport;
@@ -56,9 +58,15 @@ public:
     std::string interfaceIp;
     int session;
 
+    std::vector<std::string> mg_options;
+    std::vector<std::string> options;
+    std::vector<std::string> m_en_dis_options;
+
 protected:
     IAgent * agent;
     bool isLeader;
+
+    bool adp;   // adaptivity support
 
     //list of known leaders for future reconnections
     std::vector<Message::node> mNodes;

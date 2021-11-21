@@ -45,6 +45,7 @@ public:
     virtual Server* getServer() = 0;
 
     virtual void changeRole(std::vector<Message::node> leaders) = 0;
+
     Node *node;
 protected:
     Message::node nodeS;

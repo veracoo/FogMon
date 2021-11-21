@@ -1,5 +1,4 @@
 
-
 #include "inputParser.hpp"
 #include "node.hpp"
 #include "message.hpp"
@@ -15,6 +14,7 @@ using namespace std;
 #include <stdlib.h>
 #include <unistd.h>
 
+#include "clips.h"
 
 void handler(int sig) {
   void *array[10];
@@ -29,6 +29,7 @@ void handler(int sig) {
   fflush(stderr);
   exit(1);
 }
+
 
 //sudo docker run -it --net=host server -C 54.93.78.224
 //sudo docker run -it --net=host node -C 54.93.78.224
@@ -61,7 +62,6 @@ int main(int argc, char *argv[]) {
         return 0;
     }
      
-
     string ipR = "";
     string portR = "5555";
     string myPort = "5555";
@@ -102,9 +102,15 @@ int main(int argc, char *argv[]) {
     int leader_formula = 0;
 
     bool leader = false;
+    bool adp = false;   // adaptivity support
+
+    // metrics generator options
+    vector<string> mg_options;
+    vector<string> options;
     
     std::string interfaceIp = "";
     int session = 0;
+
 
     if(input.cmdOptionExists("--time-report"))
         time_report = stoi(input.getCmdOption("--time-report"));
@@ -145,14 +151,69 @@ int main(int argc, char *argv[]) {
     if(input.cmdOptionExists("--leader"))
         leader = true;
 
+    if(input.cmdOptionExists("--wb")){             // Without bandwidth
+        options.push_back("wb");
+    }
+
+    if(input.cmdOptionExists("--adp")){                         // Adaptive FogMon: utilizes AdaptiveFollower amd AdaptiveLeader classes
+        adp = true;                                             // instead of Follower and Leader classes.
+
+
+        //*** EXPERIMENTS CONFIG ***//
+
+        if(input.cmdOptionExists("--ex1")){                     // Experiment 1 (Effectiveness)
+
+            if (!leader){                                       
+
+                if(input.cmdOptionExists("--dm")){              // Experiment 1.1: disable metrics
+                    options.push_back("clips-exp1-dm");
+                }
+    
+                if(input.cmdOptionExists("--ctr")){             // Experiment 1.2: change time report
+                    options.push_back("clips-exp1-ctr");
+                }
+            }
+        }else if(input.cmdOptionExists("--ex2")){               // Experiment 2 (Efficiency)
+
+            if(input.cmdOptionExists("--ad")){                  // 1st config: adaptive or 2nd config: non-adaptive
+                options.push_back("clips-exp2");
+            }
+
+            if(leader){
+                options.push_back("received_cpu_logs");         // enable received CPU data logs on Leader
+
+            }else{
+                options.push_back("cpu_logs");                  // enable CPU data logs on Follower
+                options.push_back("generated_cpu_logs");        // enable CPU data logs on metrics generator
+
+                options.push_back("metrics_generator");         // enable metrics generator on Follower
+
+                // generate metrics on follower
+                if(input.cmdOptionExists("--unstable")){        // Experiment 2.1: unstable metric
+                    mg_options.push_back("cpu_unstable");
+                }else if(input.cmdOptionExists("--stable")){    // Experiment 2.2: stable metric
+                    mg_options.push_back("cpu_stable");
+                }else if(input.cmdOptionExists("--spike")){     // Experiment 2.3: spike
+                    mg_options.push_back("cpu_spike");
+                }else if(input.cmdOptionExists("--random")){    // Experiment 3.4: random metric
+                    mg_options.push_back("cpu_random");
+                }else if(input.cmdOptionExists("--stbunstb")){  // Experiment 3.5: stable-unstable metric
+                    mg_options.push_back("cpu_stbunstb");
+                }
+            }
+        }
+
+        //*** END EXPERIMENTS CONFIG ***//
+    }
+
+
     if(input.cmdOptionExists("-i"))
         interfaceIp = input.getCmdOption("-i");
     
     if(input.cmdOptionExists("-s"))
         session = stoi(input.getCmdOption("-s"));
 
-
-    Node node(myPort, leader, threads);
+    Node node(myPort, leader, threads, adp);
 
     vector<Message::node> known;
 
@@ -160,6 +221,7 @@ int main(int argc, char *argv[]) {
         known.push_back(Message::node("",ipR,portR));
 
     node.setMNodes(known);
+
 
     node.setParam(string("heartbeat"), time_silent);
     node.setParam(string("time-propagation"), time_propagation);
@@ -180,6 +242,10 @@ int main(int argc, char *argv[]) {
 
     node.setParam(string("interface"), interfaceIp);
     node.setParam(string("session"), session);
+
+    node.setParam(string("mg_options"), mg_options);            // Metrics generator options
+    node.setParam(string("options"), options);                  // Node's options for experiments (both Leader and Follower)
+    
     node.start();
 
     int a = -1;

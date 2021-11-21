@@ -1,8 +1,8 @@
 #ifndef IFACTORY_HPP_
 #define IFACTORY_HPP_
 
-#include "iconnections.hpp"
 #include "istorage.hpp"
+#include "iconnections.hpp"
 #include "server.hpp"
 
 #include <string>

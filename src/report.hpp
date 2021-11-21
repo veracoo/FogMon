@@ -151,12 +151,12 @@ public:
      * parse a rapidjson value to generate the report
      * @param data the rapidjson value
     */
-    bool parseJson(rapidjson::Value& data);
+    virtual bool parseJson(rapidjson::Value& data);
 
     /**
      * @return the rapidjson from this report
     */
-    rapidjson::Value* getJson();
+    virtual rapidjson::Value* getJson();
 
     /**
      * get the json node of this message
@@ -241,7 +241,7 @@ public:
     */
     bool getReports(std::vector<report_result> &reports);
 
-private:
+protected:
 
     /**
      * contains the rapidjson document to build the json

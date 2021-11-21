@@ -81,7 +81,7 @@ TEST(StorageTest, SaveGetLatency) {
     
     storage.saveLatencyTest(node_test, 10, 10);
 
-    vector<Report::test_result> test = storage.getLatency(10);
+    vector<Report::test_result> test = storage.getLatency(10, false);
     int dim = 1;
     EXPECT_EQ(dim, test.size());
     if(test.size() == dim) {
@@ -99,7 +99,7 @@ TEST(StorageTest, SaveGetBandwidth) {
     
     storage.saveBandwidthTest(node_test, 100.0f, 2, 5);
 
-    vector<Report::test_result> test = storage.getBandwidth(10);
+    vector<Report::test_result> test = storage.getBandwidth(10, false);
     int dim = 1;
     EXPECT_EQ(dim, test.size());
     if(test.size() == dim) {
@@ -425,7 +425,7 @@ TEST(StorageLeaderTest, GetLatency) {
     LeaderStorage storage(nodeA);
     storage.open("testB.db");
 
-    vector<Report::test_result> tests = storage.getLatency(node_testtt);
+    vector<Report::test_result> tests = storage.getLatency(node_testtt, false);
 
     int dim = 2;
     EXPECT_EQ(tests.size(),dim);
@@ -438,7 +438,7 @@ TEST(StorageLeaderTest, GetLatency) {
 TEST(StorageLeaderTest, GetBandiwdth) {
     LeaderStorage storage(nodeA);
     storage.open("testB.db");
-    vector<Report::test_result> tests = storage.getBandwidth(node_testtt);
+    vector<Report::test_result> tests = storage.getBandwidth(node_testtt, false);
 
     int dim = 2;
     EXPECT_EQ(tests.size(),dim);
@@ -522,7 +522,7 @@ TEST(StorageLeaderTest, Complete) {
 
     storage.complete();
 
-    vector<Report::test_result> res = storage.getLatency(node_test);
+    vector<Report::test_result> res = storage.getLatency(node_test, false);
     int dim = 4;
     EXPECT_EQ(res.size(),dim);
     vector<Message::node> nodes = {node_testtt, nodeA, nodeB1, nodeB};

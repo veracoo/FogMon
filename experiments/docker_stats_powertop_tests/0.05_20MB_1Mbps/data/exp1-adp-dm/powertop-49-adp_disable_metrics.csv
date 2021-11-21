@@ -1,0 +1,266 @@
+____________________________________________________________________
+			P o w e r T O P
+
+____________________________________________________________________
+ *  *  *   System Information   *  *  *
+
+PowerTOP Version;v2.11-1-g7ef7f79 ran at Thu Oct 28 13:10:18 2021
+
+Kernel Version;Linux version 5.11.0-38-generic
+System Name;Microsoft CorporationVirtual MachineHyper-V UEFI Release v4.0
+CPU Information;4 Intel(R) Core(TM) i7-9700 CPU @ 3.00GHz
+OS Information;Ubuntu 20.04 LTS
+
+Target: 1 units/s;System:  588.5 wakeup/s;CPU:  18.0% usage;GPU: 0 ops/s;GFX: 87.6 wakeups/s;VFS: 0 ops/s;
+
+____________________________________________________________________
+ *  *  *   Top 10 Power Consumers   *  *  *
+
+Usage;Events/s;Category;Description;PW Estimate
+ 10,7%;208,4;Process;[PID 1810] /usr/bin/gnome-shell ;  919 mW  
+  1,9%; 93,7;Process;[PID 2118] /opt/sublime_text/sublime_text --multiinstance ;  384 mW  
+  0,1%; 35,5;Timer;hrtimer_wakeup;  140 mW  
+  0,1%; 34,3;Timer;tick_sched_timer;  135 mW  
+  2,5%; 26,3;Process;[PID 1504] /usr/lib/xorg/Xorg vt2 -displayfd 3 -auth /run/user/1000/gdm/Xauthority -background none -noreset -keeptty -verbose ;  127 mW  
+  0,3%; 26,7;Process;[PID 2141] /opt/sublime_text/plugin_host-3.8 2118 /opt/sublime_text/sublime_text /home/verac/.config/sublime-text /home/verac/.;  107 mW  
+  0,3%; 22,8;Process;[PID 1653] /usr/bin/ibus-daemon --daemonize --xim ; 92.5 mW  
+  0,0%; 14,6;kWork;psi_avgs_work; 57.0 mW  
+  0,1%;  8,9;Interrupt;[6] tasklet(softirq); 35.8 mW  
+  0,2%;  7,7;Process;[PID 1650] /usr/bin/ibus-daemon --daemonize --xim ; 31.8 mW  
+
+____________________________________________________________________
+ *  *  *   Processor Idle State Report   *  *  *
+
+Package;0
+;
+;
+;
+
+CPU;0
+CPU;1
+CPU;2
+CPU;3
+;;
+;;
+;;
+;;
+;;
+;;
+;;
+;;
+;;
+;;
+;;
+;;
+
+____________________________________________________________________
+ *  *  *   Processor Frequency Report   *  *  *
+
+Package;0
+Idle; 100,0% 
+;
+;
+;
+;
+
+CPU 0
+Idle; 100,0% 
+CPU 1
+Idle; 100,0% 
+CPU 2
+Idle; 100,0% 
+CPU 3
+Idle; 100,0% 
+;
+;
+;
+;
+;
+;
+;
+;
+
+____________________________________________________________________
+ *  *  *   Overview of Software Power Consumers   *  *  *
+
+Usage;Wakeups/s;GPU ops/s;Disk IO/s;GFX Wakeups/s;Category;Description;PW Estimate
+106,7 ms/s;208,4;;; 57,8;Process;[PID 1810] /usr/bin/gnome-shell ;  919 mW  
+ 18,6 ms/s; 93,7;;; 18,0;Process;[PID 2118] /opt/sublime_text/sublime_text --multiinstance ;  384 mW  
+  1,3 ms/s; 35,5;;;;Timer;hrtimer_wakeup;  140 mW  
+  0,8 ms/s; 34,3;;;;Timer;tick_sched_timer;  135 mW  
+ 24,8 ms/s; 26,3;;;  9,3;Process;[PID 1504] /usr/lib/xorg/Xorg vt2 -displayfd 3 -auth /run/user/1000/gdm/Xauthority -background none -noreset -keeptty -verbose ;  127 mW  
+  2,7 ms/s; 26,7;;;;Process;[PID 2141] /opt/sublime_text/plugin_host-3.8 2118 /opt/sublime_text/sublime_text /home/verac/.config/sublime-text /home/verac/.;  107 mW  
+  3,4 ms/s; 22,8;;;;Process;[PID 1653] /usr/bin/ibus-daemon --daemonize --xim ; 92.5 mW  
+ 84,1 us/s; 14,6;;;;kWork;psi_avgs_work; 57.0 mW  
+  1,1 ms/s;  8,9;;;;Interrupt;[6] tasklet(softirq); 35.8 mW  
+  1,6 ms/s;  7,7;;;;Process;[PID 1650] /usr/bin/ibus-daemon --daemonize --xim ; 31.8 mW  
+  0,8 ms/s;  7,7;;;;Process;[PID 2138] /opt/sublime_text/plugin_host-3.3 2118 /opt/sublime_text/sublime_text /home/verac/.config/sublime-text /home/verac/.; 31.0 mW  
+  3,2 ms/s;  6,0;;;;kWork;fb_deferred_io_work; 26.8 mW  
+160,2 us/s;  6,7;;;;Process;[PID 683] /usr/bin/containerd ; 26.5 mW  
+  1,1 ms/s;  6,2;;;;Process;[PID 79389] docker-compose up --build ; 25.3 mW  
+  1,1 ms/s;  5,5;;;;Process;[PID 1767] /usr/libexec/ibus-engine-simple ; 22.7 mW  
+ 45,3 us/s;  5,5;;;;Process;[PID 13] [rcu_sched]; 21.5 mW  
+  0,9 ms/s;  4,2;;;  0,7;Process;[PID 2091] /usr/libexec/gnome-terminal-server ; 17.2 mW  
+ 83,7 us/s;  3,8;;;;Process;[PID 753] /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock ; 15.1 mW  
+  1,1 ms/s;  3,4;;;  0,8;Process;[PID 3331] /usr/bin/nautilus --gapplication-service ; 14.6 mW  
+  1,1 ms/s;  3,4;;;  0,2;Process;[PID 23968] /usr/lib/firefox/firefox -new-window ; 14.3 mW  
+207,6 us/s;  3,2;;;;Process;[PID 726] /usr/bin/containerd ; 12.9 mW  
+468,0 us/s;  3,0;;;;Process;[PID 1765] /usr/libexec/ibus-engine-simple ; 12.2 mW  
+ 11,0 us/s;  2,7;;;;kWork;console_callback; 10.5 mW  
+ 97,3 us/s;  2,5;;;;Process;[PID 524] /usr/sbin/acpid ; 9.84 mW  
+211,4 us/s;  2,2;;;;Process;[PID 532] /usr/sbin/NetworkManager --no-daemon ; 8.79 mW  
+ 83,2 us/s;  2,2;;;  0,8;Process;[PID 1715] /usr/libexec/at-spi2-registryd --use-gnome-session ; 8.66 mW  
+324,6 us/s;  1,9;;;;Process;[PID 24100] /usr/lib/firefox/firefox -contentproc -childID 2 -isForBrowser -prefsLen 4882 -prefMapSize 244561 -jsInit 286204 -p; 7.92 mW  
+ 45,7 us/s;  2,0;;;;kWork;flush_to_ldisc; 7.84 mW  
+153,0 us/s;  1,8;;;;Process;[PID 6296] /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock ; 7.36 mW  
+125,7 us/s;  1,8;;;;Process;[PID 4283] /usr/bin/containerd ; 7.34 mW  
+143,9 us/s;  1,6;;;;Process;[PID 774] /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock ; 6.57 mW  
+ 16,6 us/s;  1,6;;;;kWork;blk_mq_run_work_fn; 6.45 mW  
+108,1 us/s;  1,5;;;;Process;[PID 756] /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock ; 5.95 mW  
+399,5 us/s;  1,3;;;;Process;[PID 1719] /usr/libexec/ibus-extension-gtk3 ; 5.66 mW  
+ 96,6 us/s;  1,3;;;;Process;[PID 24203] /usr/lib/firefox/firefox -contentproc -childID 4 -isForBrowser -prefsLen 8242 -prefMapSize 244561 -jsInit 286204 -p; 5.36 mW  
+555,3 us/s;  1,1;;;;Interrupt;[7] sched(softirq); 4.84 mW  
+ 18,5 us/s;  1,0;;;;Process;[PID 42] [kcompactd0]; 3.92 mW  
+ 92,7 us/s;  0,9;;;;Process;[PID 81066] /usr/bin/containerd-shim-runc-v2 -namespace moby -id c4444e02c77c269ec8b95df22b7ad34064232b3b7e8754b956d424f5c03d68; 3.79 mW  
+103,8 us/s;  0,8;;;;Process;[PID 23985] /usr/lib/firefox/firefox -new-window ; 3.42 mW  
+  8,5 us/s;  0,7;;;;kWork;blk_mq_requeue_work; 2.93 mW  
+372,3 us/s;  0,6;;;;Process;[PID 83474] FogMon; 2.91 mW  
+ 28,2 us/s;  0,7;;;;Process;[PID 81091] /FogMon --leader -i 131.114.72.76:8248 -s 10 --adp --b --c --d --m --lt --bw --ciots ; 2.76 mW  
+ 17,7 us/s;  0,7;;;;Process;[PID 1138] /usr/libexec/gvfs-afc-volume-monitor ; 2.75 mW  
+286,7 us/s;  0,6;;;;Process;[PID 24196] /usr/lib/firefox/firefox -contentproc -childID 4 -isForBrowser -prefsLen 8242 -prefMapSize 244561 -jsInit 286204 -p; 2.62 mW  
+422,0 us/s;  0,5;;;;Process;[PID 81089] /FogMon --leader -i 131.114.72.76:8248 -s 10 --adp --b --c --d --m --lt --bw --ciots ; 2.57 mW  
+137,5 us/s;  0,6;;;;Interrupt;[3] net_rx(softirq); 2.48 mW  
+ 11,7 us/s;  0,6;;;;Process;[PID 336] [hv_balloon]; 2.35 mW  
+524,2 us/s;  0,4;;;;Process;[PID 1459] /usr/libexec/tracker-miner-fs ; 2.28 mW  
+ 40,9 us/s;  0,5;;;;kWork;vmstat_shepherd; 2.18 mW  
+ 18,7 us/s;  0,5;;;;Timer;sched_cfs_period_timer; 2.16 mW  
+ 18,7 us/s;  0,5;;;;Process;[PID 24202] /usr/lib/firefox/firefox -contentproc -childID 4 -isForBrowser -prefsLen 8242 -prefMapSize 244561 -jsInit 286204 -p; 2.16 mW  
+ 44,2 us/s;  0,5;;;;Process;[PID 24107] /usr/lib/firefox/firefox -contentproc -childID 2 -isForBrowser -prefsLen 4882 -prefMapSize 244561 -jsInit 286204 -p; 1.99 mW  
+ 43,9 us/s;  0,5;;;;Process;[PID 23986] /usr/lib/firefox/firefox -new-window ; 1.99 mW  
+ 10,7 us/s;  0,5;;;;Process;[PID 1549] /usr/libexec/gvfs-afc-volume-monitor ; 1.96 mW  
+  6,7 us/s;  0,5;;;;Timer;watchdog_timer_fn; 1.96 mW  
+  6,2 us/s;  0,5;;;;kWork;free_work; 1.95 mW  
+  9,5 us/s;  0,4;;;;kWork;ext4_end_io_rsv_work; 1.76 mW  
+ 30,7 us/s;  0,4;;;;Process;[PID 80987] /usr/bin/containerd-shim-runc-v2 -namespace moby -id c4444e02c77c269ec8b95df22b7ad34064232b3b7e8754b956d424f5c03d68; 1.59 mW  
+ 31,5 us/s;  0,3;;;;Process;[PID 83476] ping; 1.40 mW  
+ 24,0 us/s; 0,30;;;;Process;[PID 1745] /usr/libexec/xdg-desktop-portal-gtk ; 1.19 mW  
+ 14,1 us/s; 0,30;;;;Process;[PID 748] /usr/lib/snapd/snapd ; 1.18 mW  
+ 39,4 us/s; 0,25;;;;Process;[PID 24021] /usr/lib/firefox/firefox -new-window ; 1.01 mW  
+ 17,9 us/s; 0,25;;;;Process;[PID 24170] /usr/lib/firefox/firefox -contentproc -childID 3 -isForBrowser -prefsLen 5619 -prefMapSize 244561 -jsInit 286204 -p;  992 uW  
+ 15,6 us/s; 0,25;;;;Process;[PID 489] /lib/systemd/systemd-resolved ;  990 uW  
+ 12,1 us/s; 0,25;;;;Timer;timerfd_tmrproc;  986 uW  
+124,0 us/s; 0,20;;;;Process;[PID 799] /usr/lib/snapd/snapd ;  903 uW  
+ 49,0 us/s; 0,20;;;;Process;[PID 81213] /usr/libexec/tracker-store ;  828 uW  
+ 23,9 us/s; 0,20;;;;Process;[PID 1924] /usr/libexec/gsd-xsettings ;  803 uW  
+ 16,1 us/s; 0,20;;;;Process;[PID 1906] /usr/libexec/gsd-color ;  796 uW  
+ 15,4 us/s; 0,20;;;;Process;[PID 1921] /usr/libexec/gsd-wacom ;  795 uW  
+ 11,2 us/s; 0,20;;;;Process;[PID 83484] iperf3;  791 uW  
+ 11,1 us/s; 0,20;;;;Process;[PID 218] [jbd2/sda1-8];  790 uW  
+ 10,0 us/s; 0,20;;;;Process;[PID 538] /usr/lib/accountsservice/accounts-daemon ;  789 uW  
+  6,5 us/s; 0,20;;;;Process;[PID 24064] /usr/lib/firefox/firefox -contentproc -childID 1 -isForBrowser -prefsLen 102 -prefMapSize 244561 -jsInit 286204 -pa;  786 uW  
+  3,9 us/s; 0,20;;;;Process;[PID 81193] /FogMon -C leader -i 131.114.72.76:8248 -s 10 --adp --b --c --d --m --lt --bw --ciots ;  783 uW  
+  1,9 us/s; 0,20;;;;kWork;wb_workfn;  781 uW  
+153,9 us/s; 0,15;;;;Process;[PID 83440] tracker-extract;  738 uW  
+ 75,9 us/s; 0,15;;;;Process;[PID 83443] dconf worker;  660 uW  
+ 63,4 us/s; 0,15;;;;Process;[PID 83439] pool-tracker-mi;  648 uW  
+ 49,7 us/s; 0,15;;;;Process;[PID 83473] FogMon;  634 uW  
+ 33,1 us/s; 0,15;;;;Process;[PID 81090] /FogMon --leader -i 131.114.72.76:8248 -s 10 --adp --b --c --d --m --lt --bw --ciots ;  618 uW  
+ 26,3 us/s; 0,15;;;;Process;[PID 24163] /usr/lib/firefox/firefox -contentproc -childID 3 -isForBrowser -prefsLen 5619 -prefMapSize 244561 -jsInit 286204 -p;  611 uW  
+ 21,2 us/s; 0,15;;;;Process;[PID 2180] update-notifier ;  606 uW  
+ 16,0 us/s; 0,15;;;;Process;[PID 2014] /usr/libexec/evolution-data-server/evolution-alarm-notify ;  601 uW  
+ 15,8 us/s; 0,15;;;;Process;[PID 81216] /usr/libexec/tracker-store ;  600 uW  
+ 11,6 us/s; 0,15;;;;Process;[PID 83480] iperf3;  596 uW  
+ 11,3 us/s; 0,15;;;;Process;[PID 83478] iperf3;  596 uW  
+ 11,0 us/s; 0,15;;;;Process;[PID 24055] /usr/lib/firefox/firefox -contentproc -childID 1 -isForBrowser -prefsLen 102 -prefMapSize 244561 -jsInit 286204 -pa;  596 uW  
+  6,8 us/s; 0,15;;;;Process;[PID 1764] /usr/libexec/dconf-service ;  591 uW  
+  1,2 us/s; 0,15;;;;Timer;sched_rt_period_timer;  586 uW  
+  0,8 us/s; 0,15;;;;kWork;lru_add_drain_per_cpu;  585 uW  
+  0,6 us/s; 0,15;;;;kWork;blk_mq_timeout_work;  585 uW  
+  0,3 us/s; 0,15;;;;kWork;kfree_rcu_work;  585 uW  
+  0,1 us/s; 0,15;;;;kWork;kfree_rcu_monitor;  585 uW  
+130,8 us/s; 0,10;;;;Process;[PID 1659] /usr/libexec/ibus-extension-gtk3 ;  521 uW  
+102,9 us/s; 0,10;;;;Process;[PID 83472] /usr/bin/iperf3 -s -p 5201 ;  493 uW  
+243,0 us/s; 0,05;;;;Process;[PID 83487] FogMon;  438 uW  
+ 34,2 us/s; 0,10;;;;Process;[PID 83487] sh;  424 uW  
+ 33,4 us/s; 0,10;;;;Process;[PID 83479] sh;  423 uW  
+218,9 us/s; 0,05;;;;Interrupt;[9] RCU(softirq);  414 uW  
+
+
+The system baseline power is estimated at:  2.48  W;
+____________________________________________________________________
+ *  *  *   Device Power Report   *  *  *
+
+Usage;Device Name;PW Estimate
+ 18,0%;CPU misc;  2.48 W   
+ 18,0%;CPU core;    0 mW   
+ 18,0%;DRAM;    0 mW   
+  3,1 pkts/s;nic:veth274ff7b;           
+  3,0 pkts/s;nic:vetha1fcebb;           
+  0,8 pkts/s;Interfaccia di rete: eth0 (hv_netvsc);           
+  0,1 pkts/s;nic:br-68ee10fa0883;           
+  0,0%;runtime-kgdboc;           
+  0,0%;runtime-pcspkr;           
+  0,0%;runtime-PNP0003:00;           
+  0,0%;runtime-serial8250;           
+  0,0 pkts/s;nic:docker0;           
+  0,0%;runtime-efivars.0;           
+  0,0 pkts/s;Interfaccia di rete: eth1 (hv_netvsc);           
+  0,0%;runtime-alarmtimer.0.auto;           
+  0,0%;runtime-reg-dummy;           
+  0,0%;runtime-HYPER_V_GEN_COUNTER_V1:00;           
+  0,0%;runtime-eisa.0;           
+  0,0%;runtime-intel_rapl_msr.0;           
+  0,0%;runtime-Fixed MDIO bus.0;           
+  0,0%;runtime-rtc-efi.0;           
+  0,0%;runtime-intel_pmc_core.0;           
+  0,0%;runtime-VMBUS:00;           
+  0,0%;runtime-efi-framebuffer.0;           
+____________________________________________________________________
+ *  *  *   Process Device Activity   *  *  *
+
+Process;Device
+systemd;/dev/autofs
+;/dev/input/event0
+;/dev/input/event1
+;/dev/kmsg
+;/dev/rfkill
+systemd-journal;/dev/kmsg
+;/dev/kmsg
+acpid;/dev/input/event1
+systemd-logind;/dev/input/event0
+;/dev/input/event0
+;/dev/input/event1
+;/dev/input/event1
+;/dev/input/event1
+bpfilter_umh;/dev/kmsg
+gvfsd-fuse;/dev/fuse
+Xorg;/dev/fb0
+;/dev/vga_arbiter
+gsd-rfkill;/dev/rfkill
+gvfsd-fuse;/dev/fuse
+Xorg;/dev/fb0
+;/dev/input/event0
+;/dev/input/event1
+;/dev/vga_arbiter
+xdg-document-po;/dev/fuse
+gsd-rfkill;/dev/rfkill
+;/dev/rfkill
+
+____________________________________________________________________
+ *  *  *   AHCI ALPM Residency Statistics - Not supported on this macine   *  *  *
+
+____________________________________________________________________
+ *  *  *   Software Settings in Need of Tuning   *  *  *
+
+Description;Script
+Timeout del VM writeback;echo '1500' > '/proc/sys/vm/dirty_writeback_centisecs';
+____________________________________________________________________
+ *  *  *   Untunable Software Issues   *  *  *
+
+Description
+____________________________________________________________________
+ *  *  *   Optimal Tuned Software Settings   *  *  *
+
+Description
+NMI watchdog dovrebbe essere disattivato
+

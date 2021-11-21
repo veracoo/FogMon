@@ -1,16 +1,18 @@
 #include "message.hpp"
 
 #include "report.hpp"
+#include "adaptive_report.hpp"
 #include "rapidjson/reader.h"
 #include "rapidjson/document.h"
 #include "rapidjson/writer.h"
 #include "rapidjson/stringbuffer.h"
 
+
 using namespace std;
 using namespace rapidjson;
 
 Message::Message() {
-    this->argument = Argument::NONE;
+    this->argument = Argument::argNONE;
     this->data = Value("none");
     this->doc.SetObject();
 }
@@ -251,4 +253,27 @@ string Message::getString() {
     doc.Accept (writer);
     std::string str (s.GetString());
     return str;
+}
+
+/////////////////////////////////////////////////////////////
+
+void Message::setData(std::vector<int> metrics) {
+    Value arr(kArrayType);
+    Document::AllocatorType& allocator = doc.GetAllocator();
+    
+    for(auto metric : metrics) {
+        arr.PushBack(metric, allocator);
+    }                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+    this->data = arr;
+}
+
+bool Message::getData(std::vector<int>& metrics) {
+    if(!this->data.IsArray())
+        return false;
+    for (auto& v : this->data.GetArray()) {
+        if(!v.IsInt())
+            return false;
+        metrics.push_back(v.GetInt());
+    }
+    return true;
 }

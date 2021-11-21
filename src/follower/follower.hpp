@@ -8,8 +8,10 @@
 #include "iiotdiscoverer.hpp"
 #include "readproc.hpp"
 
+
 class Follower : virtual public IAgent {
 public:
+    Follower();
     Follower(Message::node node, int nThreads);
     ~Follower();
 
@@ -36,6 +38,8 @@ public:
     virtual Server* getServer();
 
     virtual void changeRole(std::vector<Message::node> leaders);
+
+    static int nUpdate;
 
 protected:
 
@@ -71,17 +75,16 @@ protected:
 
     int nThreads;
 
-
     //start iperf command line server
     virtual int startIperf();
     //start estimate tool (assolo) server
     virtual int startEstimate();
 
     //timer for heartbeat
-    void timer();
+    virtual void timer();
 
     //timer for latency and bandwidth tests
-    void TestTimer();
+    virtual void TestTimer();
 
     void testIoT();
 
@@ -103,7 +106,7 @@ protected:
     bool checkServer(vector<Message::node> mNodes);
 
     //get the hardware of this node
-    void getHardware();
+    virtual void getHardware();
 };
 
 #endif

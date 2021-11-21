@@ -19,6 +19,8 @@
 
 using namespace std;
 
+Leader::Leader() {}
+
 Leader::Leader(Message::node node, int nThreads) : Follower(node, nThreads), selector(this) {
     this->nodeS = node;
 }
@@ -29,11 +31,14 @@ void Leader::initialize(LeaderFactory* fact) {
     }else {
         this->factory = fact;
     }
-    this->storage = this->factory->newStorage("leader_node.db", this->nodeS);
+
+    this->storage = this->factory->newStorage("monitoring.db", this->nodeS);
     Follower::storage = this->storage;
+
     this->connections = this->factory->newConnections(this->nThreads);
     this->connections->initialize(this);
     Follower::connections = this->connections;
+    
     Follower::initialize(this->factory);
 }
 
@@ -108,6 +113,37 @@ ILeaderConnections* Leader::getConnections() {
 ILeaderStorage* Leader::getStorage() {
     return this->storage;
 }
+
+//////////////////////////////////////////////////////////////////////////
+// thread che ogni x secondi manda segnale di timeReport update ai suoi follower
+/*
+void Leader::updateTimeReport(){
+    while(this->running){
+        
+        auto t_start = std::chrono::high_resolution_clock::now();
+
+        vector<Message::node> ips = this->getStorage()->getNodes();
+
+        int newTimeReport = rand()%21+10;        // random number between 10 and 30 (seconds)
+
+        for(auto&& node : ips){
+            bool res = this->connections->sendChangeTimeReport(node, newTimeReport);
+            if (!res)
+                cout << "Error: ACK not received " << node.ip.c_str() << endl;
+        }
+
+        auto t_end = std::chrono::high_resolution_clock::now();
+        auto elapsed_time = std::chrono::duration_cast<std::chrono::duration<float>>(t_end-t_start).count();
+        cout << "updateTimeReport " << elapsed_time << endl;
+
+        int sleeptime = 40-elapsed_time;
+        if (sleeptime > 0)
+            sleeper.sleepFor(chrono::seconds(sleeptime));
+    }
+}
+*/
+
+//////////////////////////////////////////////////////////////////////////
 
 void Leader::timerFun() {
     this->iter = 1;
@@ -260,7 +296,13 @@ Message::node Leader::getMyNode() {
 }
 
 void Leader::changeRole(vector<Message::node> leaders) {
+    cout << "Leader::changeRole()" << endl;
+    for(auto &l : leaders){
+        cout << l.ip << endl;
+    }
+
     bool present = false;
+
     for(auto node : leaders) {
         if(node.id == this->getMyNode().id) {
             present = true;
@@ -282,6 +324,7 @@ void Leader::changeRole(vector<Message::node> leaders) {
         this->lastQuality = -random()%10-20;
         this->node->demote(leaders);
     }else {
+        cout << "removing leaders ..." << endl;
         this->storage->removeChangeRole(leaders);
         printf("E\n");
         fflush(stdout);
