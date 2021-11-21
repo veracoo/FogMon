@@ -36,7 +36,7 @@ ReadProc::ReadProc(char** args) {
 }
 
 ReadProc::~ReadProc() {
-    this->killproc();
+    int res = this->killproc();
     posix_spawn_file_actions_destroy(&action);
     sleep(1); // wait for the other process to exit before destroying variables
 }
@@ -63,6 +63,22 @@ int ReadProc::killproc() {
             close(out[1]);
             return 0;
         }else {
+            kill(pid, SIGTERM);
+            sleep(1);
+            if(waitpid(pid, &status, WNOHANG) > 0){
+                kill(pid, SIGKILL);
+                waitpid(pid, &status, 0);   // for zombie processes
+
+                close(out[1]);
+                status = -1;
+                return 0;
+            }else{
+                cerr << "Error killing.\n";
+
+                return -1;
+            }
+
+            /*
             if (kill(pid, SIGKILL) == 0) {
                 waitpid(pid, &status, WNOHANG);
                 close(out[1]);
@@ -70,9 +86,9 @@ int ReadProc::killproc() {
                 return 0;
             } else {
                 cerr << "Error killing.\n";
-
                 return -1;
             }
+            */
         }
     }
     return -1;
