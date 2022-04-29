@@ -3,7 +3,7 @@
 
 _A self-adaptive P2P monitoring tool for the Cloud-to-Thing continuum infrastructures._
 
-> Submitted to 17th Symposium on Software Engineering for Adaptive and Self-Managing Systems (SEAMS 2022)
+> V. Colombo, A. Tundo, M. Ciavotta, and L. Mariani, “Towards Self-Adaptive Peer-to-Peer Monitoring for Fog Environments,” in Proceedings of the 17th Symposium on Software Engineering for Adaptive and Self-Managing Systems (SEAMS), 2022.
 
 ## Synopsys
 
